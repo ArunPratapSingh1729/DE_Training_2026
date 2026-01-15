@@ -20,4 +20,3 @@ if len(password) >= min_length:
             print("Password is not valid please include the numbers into it")
 else:
     print("Password length should be at least 8")
-    print("Password length should be greater than 8")

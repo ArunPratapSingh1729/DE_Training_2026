@@ -1,7 +1,11 @@
-s = "arun pratap singh"
-character_arr = {}
+text = "hello world"
 
-for ch in s:
-    character_arr[ch] = character_arr.get(ch , 0) + 1
+ch={}
 
-print(character_arr)
+for i in text:
+    if i in ch:
+        ch[i] += 1
+    else:
+        ch[i] = 1
+
+print(ch)

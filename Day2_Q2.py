@@ -5,7 +5,7 @@ l.append(5)
 print("List :", l)
 l.remove(1)
 print("List :", l)
-if 2 in l :
+if 2 not in l :
     print("2 removed from the list")
 
 print(l)

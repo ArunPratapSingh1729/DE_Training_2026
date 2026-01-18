@@ -1,10 +1,10 @@
-def fun(num):
+def factorial(num):
     if num <=1:
         return 1
-    return num * fun(num-1)
+    return num * factorial(num-1)
 
 x = 5
-a = fun(x)
+a = factorial(x)
 print("The factorial for the num ", x, "is : ", a)
 
 

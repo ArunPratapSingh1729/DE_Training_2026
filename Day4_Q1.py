@@ -12,4 +12,4 @@ for i in range(row):
         rows.append(matrix1[i][j] + matrix2[i][j])
     result.append(rows)
 
-print("The summation of the matrix is : ", result)
+print("The summation of both the matrix is : ", result)

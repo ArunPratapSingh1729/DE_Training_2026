@@ -19,9 +19,6 @@ api_url = "url"
 response = requests.post('url', json= students)
 
 if response.status_code == 200 or response.status_code == 201:
-    print("response successfully accepted")
+    print(f"Response successfully accepted{response.status_code}")
 else:
     print(f"Failed to send the json data {response.status_code}")
-
-
-

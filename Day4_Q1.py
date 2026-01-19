@@ -5,11 +5,14 @@ row = len(matrix1)
 col = len(matrix1[0])
 
 result  = []
+try:
+    for i in range(row):
+        rows = []
+        for j in range(col):
+          rows.append(matrix1[i][j] + matrix2[i][j])
+          result.append(rows)
 
-for i in range(row):
-    rows = []
-    for j in range(col):
-        rows.append(matrix1[i][j] + matrix2[i][j])
-    result.append(rows)
+    print("The summation of both the matrix is : ", result)
+except Exception as e:
+    print("Exception: ", e)
 
-print("The summation of both the matrix is : ", result)

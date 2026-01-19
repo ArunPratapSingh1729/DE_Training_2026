@@ -8,7 +8,7 @@ try:
     a = function(x)
     print("The factorial for the num", x, "is:", a)
 except Exception as e:
-    print("the exception occurs:", e)
+    print("Exception: ", e)
 finally:
     print("your program get run")
 

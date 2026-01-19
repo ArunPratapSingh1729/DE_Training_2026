@@ -8,3 +8,4 @@ data = {
 
 dic = {k:v for k,v in data.items() if k.lower().startswith('a')}
 print(dic)
+

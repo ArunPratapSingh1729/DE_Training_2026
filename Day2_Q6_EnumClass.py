@@ -1,5 +1,6 @@
 from enum import Enum, unique
 
+
 @unique
 class Department(Enum):
     HR = "HR Department"
@@ -9,15 +10,25 @@ class Department(Enum):
 
 class Employee:
     def __init__(self, id, name, department: Department):
-        self.id = id
-        self.name = name
-        self.department = department
+        try:
+            self.id = int(id)
+            self.name = str(name)
+
+            if not isinstance(department, Department):
+                raise TypeError("department must be a Department enum")
+
+            self.department = department
+
+        except Exception as e:
+            raise ValueError("Invalid Employee initialization") from e
 
 
 class HRManager(Employee):
-    def __init:
     def __init__(self, id, name):
-        super().__init__(id, name, Department.HR)
+        try:
+            super().__init__(id, name, Department.HR)
+        except Exception as e:
+            raise ValueError("Invalid HRManager initialization") from e
 
     def work(self):
         return f"{self.name} is managing recruitment and employee relations."
@@ -25,7 +36,10 @@ class HRManager(Employee):
 
 class PythonDeveloper(Employee):
     def __init__(self, id, name):
-        super().__init__(id, name, Department.DE)
+        try:
+            super().__init__(id, name, Department.DE)
+        except Exception as e:
+            raise ValueError("Invalid PythonDeveloper initialization") from e
 
     def work(self):
         return f"{self.name} is a python code developer"
@@ -33,7 +47,10 @@ class PythonDeveloper(Employee):
 
 class DataScientist(Employee):
     def __init__(self, id, name):
-        super().__init__(id, name, Department.DS)
+        try:
+            super().__init__(id, name, Department.DS)
+        except Exception as e:
+            raise ValueError("Invalid DataScientist initialization") from e
 
     def work(self):
         return f"{self.name} is a Data Scientist"

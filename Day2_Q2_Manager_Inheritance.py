@@ -1,9 +1,13 @@
 class Employee:
       
     def __init__(self, id, name, department):
-        self.id = id
-        self.name = name
-        self.department = department
+        try:
+            self.id = int(id)
+            self.name = str(name)
+            self.department = str(department)
+        except Exception as e:
+            print("Error while initializing Employee:", e)
+
         
     def info(self):
         print("Id of the manager is :", self.id)
@@ -13,7 +17,10 @@ class Employee:
 
 class Manager(Employee):
     def __init__(self, id, name, department):
-        super().__init__(id, name, department)
+        try:
+            super().__init__(id, name, department)
+        except Exception as e:
+            print("Error while initializing Manager:", e)
 
     def work(self):
         return f"{self.name} is managing recruitment and employee relations."

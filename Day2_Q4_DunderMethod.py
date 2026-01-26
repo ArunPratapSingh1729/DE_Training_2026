@@ -7,10 +7,9 @@ class Student:
         return f"Student Name: {self.name}, Marks: {self.marks}"
 
     def __repr__(self):
-        return f"Student(name='{self.name}', marks={self.marks})"
+        return f"Student(Name='{self.name}', Marks={self.marks})"
 
 
 s1 = Student("arun", 85)
 
-print(s1)        
-s1              
+print(s1)       

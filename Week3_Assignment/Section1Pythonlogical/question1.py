@@ -13,3 +13,5 @@ def validator(fn):
 @validator
 def valid_permutations(arr):
     return set(permutations(arr))
+arr = [1,2,3]
+valid_permutations(arr)

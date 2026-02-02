@@ -1,42 +1,84 @@
 import pandas as pd
+import numpy as np
 
 df1 = pd.read_csv("world_alcohol_consumption_1.csv")
 df2 = pd.read_csv("world_alcohol_consumption_2.csv")
 
-total_count = df2['Count'].sum()
+df1.columns = df1.columns.str.strip()
+df2.columns = df2.columns.str.strip()
 
-gender_counts = df2.groupby('Gender')['Count'].sum()
+df1['Price'] = np.random.randint(1, 30, size=len(df1))
+
+df2['Brand'] = np.random.choice(
+    ['Brand_A', 'Brand_B', 'Brand_C', 'Brand_D', 'Brand_E'],
+    size=len(df2)
+)
+
+total_individuals = df1['Count'].sum()
+
+gender_representation = df1['Gender'].value_counts()
+
+gender_counts = df1.groupby('Gender')['Count'].sum()
 
 unique_countries = df2['Countries'].nunique()
 
-highest_consumption_country = (df1.groupby('Country')['Display Value'].sum().idxmax())
+highest_consumption_country = (
+    df2.groupby('Countries')['Display Value']
+    .sum()
+    .idxmax()
+)
 
-merged_df = pd.merge( df1, df2, left_on='Country', right_on='Countries', how='inner')
+merged_df = pd.merge(
+    df1,
+    df2,
+    left_on='Country',
+    right_on='Countries',
+    how='inner'
+)
 
-average_display_value_by_region_df = (merged_df.groupby('WHO region')['Display Value'].mean().reset_index())
+average_display_value_by_region_df = (
+    merged_df.groupby('WHO Region')['Display Value']
+    .mean()
+    .reset_index()
+)
 
-gender_region_consumption = (merged_df.groupby(['WHO region', 'Gender'])['Display Value'].mean().reset_index())
+region_gender_avg = (
+    merged_df.groupby(['WHO Region', 'Gender'])['Display Value']
+    .mean()
+)
 
-df1['Price'] = [10.0] * len(df1)
-df1['Brand'] = df1['Beverage Types']
+df2['Date'] = pd.to_datetime(df2['Date'])
+df2['Month'] = df2['Date'].dt.month
+df2['Year'] = df2['Date'].dt.year
 
-df1['Year'] = df1['Year'].astype(int)
+month_max_sales = (
+    df2.groupby('Month')['Count']
+    .sum()
+    .idxmax()
+)
 
-max_year = df1['Year'].max()
+top_brand_in_max_month = (
+    df2[df2['Month'] == month_max_sales]
+    .groupby('Brand')['Count']
+    .sum()
+    .idxmax()
+)
 
-max_brand_month = (df1[df1['Year'] == max_year].groupby('Brand')['Display Value'].sum().idxmax())
+last_year = df2['Year'].max()
 
-top_5_brands = (df1[df1['Year'] == max_year].groupby(['Brand', 'Country'])['Display Value'].sum().reset_index().sort_values('Display Value', ascending=False).head(5))
+top_5_brands_last_year = (
+    df2[df2['Year'] == last_year]
+    .groupby(['Brand', 'Countries'])['Count']
+    .sum()
+    .sort_values(ascending=False)
+    .head(5)
+)
 
+who_limit = 5
 
-who_limit = df1['Display Value'].mean()
 countries_exceeding_who = (
     df1.groupby('Country')['Display Value']
-       .mean()
-       .reset_index()
+    .mean()
 )
-countries_exceeding_who = countries_exceeding_who[
-    countries_exceeding_who['Display Value'] > who_limit
-]
 
-
+countries_exceeding_who = countries_exceeding_who[countries_exceeding_who > who_limit]

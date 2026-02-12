@@ -11,7 +11,7 @@ create table development (
     emp_id int primary key auto_increment,
     emp_name varchar(50),
     department varchar(50),
-    score int
+    score int   
 );
 
 create table data_engineering (
